@@ -30,13 +30,13 @@ class TimeBased extends \lang\Object {
   public function interval() { return $this->interval; }
 
   /**
-   * Generates the token for a given interval
+   * Returns a time-based one-time password at a given time
    *
-   * @param  int $interval (timestamp div this.interval)
+   * @param  int $time The unix timestamp
    * @return string
    */
-  private function generate($interval) {
-    $time= str_pad(pack('N', $interval), 8, "\x00", STR_PAD_LEFT);
+  public function at($time) {
+    $time= str_pad(pack('N', (int)($time / $this->interval)), 8, "\x00", STR_PAD_LEFT);
     $hash= hash_hmac($this->crypto, $time, $this->secret->bytes(), true);
 
     $offset= ord($hash{strlen($hash) - 1}) & 0xf;
@@ -51,22 +51,12 @@ class TimeBased extends \lang\Object {
   }
 
   /**
-   * Returns a time-based one-time password at a given time
-   *
-   * @param  int $time The unix timestamp
-   * @return string
-   */
-  public function at($time) {
-    return $this->generate((int)($time / $this->interval));
-  }
-
-  /**
    * Returns a time-based one-time password based on the current time
    *
    * @return string
    */
   public function current() {
-    return $this->generate((int)(time() / $this->interval));
+    return $this->at(time());
   }
 
   /**
@@ -75,7 +65,7 @@ class TimeBased extends \lang\Object {
    * @return string
    */
   public function previous() {
-    return $this->generate((int)(time() / $this->interval) - 1);
+    return $this->at(time() - $this->interval);
   }
 
   /**
@@ -84,7 +74,7 @@ class TimeBased extends \lang\Object {
    * @return string
    */
   public function next() {
-    return $this->generate((int)(time() / $this->interval) + 1);
+    return $this->at(time() + $this->interval);
   }
 
   /**
@@ -100,7 +90,7 @@ class TimeBased extends \lang\Object {
     if (null === $time) $time= time();
 
     for ($i= $tolerance->past(); $i <= $tolerance->future(); $i++) {
-      if ($token === $this->generate((int)($time / $this->interval) + $i)) return true;
+      if ($token === $this->at($time + $i * $this->interval)) return true;
     }
     return false;
   }

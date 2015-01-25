@@ -1,11 +1,23 @@
 <?php namespace com\google\authenticator;
 
+use lang\types\Bytes;
+
+/**
+ * A secret based on raw bytes
+ *
+ * @test xp://com.google.authenticator.unittest.SecretBytesTest
+ */
 class SecretBytes extends \lang\Object implements Secret {
   private $bytes;
 
-  /** @param string $bytes */
+  /**
+   * Creates a new secret string given base32-encoded bytes
+   *
+   * @param  var $arg Either a string or a Bytes instance
+   * @throws lang.FormatException
+   */
   public function __construct($bytes) {
-    $this->bytes= $bytes;
+    $this->bytes= $bytes instanceof Bytes ? $bytes->buffer : $bytes;
   }
 
   /** @return string */

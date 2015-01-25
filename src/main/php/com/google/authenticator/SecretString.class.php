@@ -4,10 +4,11 @@ use lang\FormatException;
 use security\SecureString;
 
 /**
- * A secret base on base32 encoded string 
+ * A secret based on a base32-encoded string 
  *
  * @see  http://tools.ietf.org/html/rfc3548
  * @see  http://tools.ietf.org/html/rfc4648
+ * @test xp://com.google.authenticator.unittest.SecretStringTest
  */
 class SecretString extends \lang\Object implements Secret {
   private $bytes;

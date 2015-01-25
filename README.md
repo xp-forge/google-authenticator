@@ -37,4 +37,28 @@ $verified= $timebased->verify($token, null, $time);
 $verified= $timebased->verify($token, Tolerance::$PREVIOUS_AND_NEXT, $time);
 ```
 
+The following shows the API for counter-based one-time passwords (HOTP):
+
+```php
+use com\google\authenticator\CounterBased;
+use com\google\authenticator\SecretString;
+use com\google\authenticator\Tolerance;
+use security\SecureString;
+
+$secret= new SecureString('2BX6RYQ4MD5M46KP');
+$counterbased= new CounterBased(new SecretString($secret));
+$counter= 0;
+
+// Get token for a given counter
+$token= $counterbased->at($counter);
+
+// Must match exactly
+$verified= $counterbased->verify($token, $counter, Tolerance::$NONE);
+
+// Allows previous and next
+$verified= $counterbased->verify($token, $counter);
+$verified= $counterbased->verify($token, $counter, Tolerance::$PREVIOUS_AND_NEXT;
+```
+
+
 *Note: We use SecureString so that in case of exceptions, the secret will not appear in stack traces.*

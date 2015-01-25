@@ -89,8 +89,8 @@ class TimeBased extends \lang\Object {
     if (null === $tolerance) $tolerance= Tolerance::$PREVIOUS_AND_NEXT;
     if (null === $time) $time= time();
 
-    for ($i= $tolerance->past(); $i <= $tolerance->future(); $i++) {
-      if ($token === $this->at($time + $i * $this->interval)) return true;
+    for ($offset= $tolerance->past(); $offset <= $tolerance->future(); $offset++) {
+      if ($token === $this->at($time + $offset * $this->interval)) return true;
     }
     return false;
   }

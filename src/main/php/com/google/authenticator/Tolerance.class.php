@@ -25,4 +25,17 @@ class Tolerance extends \lang\Object {
 
   /** @return int */
   public function future() { return $this->future; }
+
+  /**
+   * Creates a string representation of this tolerance instance.
+   *
+   * @return string
+   */
+  public function toString() {
+    if ($this->past === $this->future) {
+      return $this->getClassName().'('.$this->future.')';
+    } else {
+      return $this->getClassName().'(['.$this->past.'..+'.$this->future.'])';
+    }
+  }
 }

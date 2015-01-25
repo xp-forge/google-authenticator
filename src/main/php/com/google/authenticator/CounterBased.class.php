@@ -8,6 +8,8 @@
  */
 class CounterBased extends Algorithm {
 
+  static function __static() { }
+
   /**
    * Returns a counter-based one-time password at a given counter value
    *

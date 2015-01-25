@@ -11,6 +11,8 @@
 class TimeBased extends Algorithm {
   private $interval;
 
+  static function __static() { }
+
   /**
    * Creates a new time-based one-time-password instance
    *

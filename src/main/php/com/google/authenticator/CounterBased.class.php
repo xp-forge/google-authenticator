@@ -27,11 +27,6 @@ class CounterBased extends Algorithm {
    * @return bool
    */
   public function verify($token, $count, Tolerance $tolerance= null) {
-    if (null === $tolerance) $tolerance= Tolerance::$PREVIOUS_AND_NEXT;
-
-    for ($offset= $tolerance->past(); $offset <= $tolerance->future(); $offset++) {
-      if ($token === $this->at($count + $offset)) return true;
-    }
-    return false;
+    return $this->compare($token, (int)$count, $tolerance);
   }
 }

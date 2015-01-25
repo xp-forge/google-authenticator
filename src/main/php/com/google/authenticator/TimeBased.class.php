@@ -73,12 +73,7 @@ class TimeBased extends Algorithm {
    * @return bool
    */
   public function verify($token, $time= null, Tolerance $tolerance= null) {
-    if (null === $tolerance) $tolerance= Tolerance::$PREVIOUS_AND_NEXT;
     if (null === $time) $time= time();
-
-    for ($offset= $tolerance->past(); $offset <= $tolerance->future(); $offset++) {
-      if ($token === $this->at($time + $offset * $this->interval)) return true;
-    }
-    return false;
+    return $this->compare($token, (int)($time/ $this->interval), $tolerance);
   }
 }

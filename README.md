@@ -12,14 +12,15 @@ Supports one-time-passwords accordings (HOTP & TOTP) according to [RFC 4226](htt
 
 Example
 -------
+The following shows the API for time-based one-time passwords (TOTP):
 
 ```php
 use com\google\authenticator\TimeBased;
 use com\google\authenticator\SecretString;
 use security\SecureString;
 
-$secret= new SecretString(new SecureString('2BX6RYQ4MD5M46KP'));
-$timebased= new TimeBased($secret);
+$secret= new SecureString('2BX6RYQ4MD5M46KP');
+$timebased= new TimeBased(new SecretString($secret));
 
 $time= time();
 
@@ -31,3 +32,5 @@ $token= $timebased->current();
 $verified= $timebased->verify($token, $time);
 $verified= $timebased->verify($token);
 ```
+
+*Note: We use SecureString so that in case of exceptions, the secret will not appear in stack traces.*

@@ -33,8 +33,8 @@ $verified= $timebased->verify($token, Tolerance::$NONE, $time);
 
 // Allows previous and next
 $verified= $timebased->verify($token);
-$verified= $timebased->verify($token, null, $time);
-$verified= $timebased->verify($token, Tolerance::$PREVIOUS_AND_NEXT, $time);
+$verified= $timebased->verify($token, $time);
+$verified= $timebased->verify($token, $time, Tolerance::$PREVIOUS_AND_NEXT);
 ```
 
 The following shows the API for counter-based one-time passwords (HOTP):

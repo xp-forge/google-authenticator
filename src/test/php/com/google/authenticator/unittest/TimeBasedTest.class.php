@@ -48,17 +48,17 @@ class TimeBasedTest extends \unittest\TestCase {
 
   #[@test, @values('fixtures')]
   public function verify_without_tolerance($time, $token) {
-    $this->assertTrue((new TimeBased($this->secret))->verify($token, Tolerance::$NONE, $time));
+    $this->assertTrue((new TimeBased($this->secret))->verify($token, $time, Tolerance::$NONE));
   }
 
   #[@test, @values('previous_and_next')]
   public function verify_allowing_previous_and_next_is_default($token, $which) {
-    $this->assertTrue((new TimeBased($this->secret))->verify($token, null, 250948500), $which);
+    $this->assertTrue((new TimeBased($this->secret))->verify($token, 250948500), $which);
   }
 
   #[@test, @values('previous_and_next')]
   public function verify_allowing_previous_and_next($token, $which) {
-    $this->assertTrue((new TimeBased($this->secret))->verify($token, Tolerance::$PREVIOUS_AND_NEXT, 250948500), $which);
+    $this->assertTrue((new TimeBased($this->secret))->verify($token, 250948500, Tolerance::$PREVIOUS_AND_NEXT), $which);
   }
 
   #[@test]

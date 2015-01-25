@@ -8,8 +8,8 @@
  * @see   php://hash_hmac
  * @test  xp://com.google.authenticator.unittest.TimeBasedTest
  */
-class TimeBased extends \lang\Object {
-  private $secret, $interval, $digits, $crypto;
+class TimeBased extends Algorithm {
+  private $interval;
 
   /**
    * Creates a new time-based one-time-password instance
@@ -20,10 +20,8 @@ class TimeBased extends \lang\Object {
    * @param  string $crypto If omitted, defaults to "sha1"
    */
   public function __construct(Secret $secret, $interval= 30, $digits= 6, $crypto= 'sha1') {
-    $this->secret= $secret;
+    parent::__construct($secret, $digits, $crypto);
     $this->interval= $interval;
-    $this->digits= $digits;
-    $this->crypto= $crypto;
   }
 
   /** @return int */
@@ -36,18 +34,7 @@ class TimeBased extends \lang\Object {
    * @return string
    */
   public function at($time) {
-    $time= str_pad(pack('N', (int)($time / $this->interval)), 8, "\x00", STR_PAD_LEFT);
-    $hash= hash_hmac($this->crypto, $time, $this->secret->bytes(), true);
-
-    $offset= ord($hash{strlen($hash) - 1}) & 0xf;
-    $binary=
-      ((ord($hash{$offset}) & 0x7f) << 24) |
-      ((ord($hash{$offset + 1}) & 0xff) << 16) |
-      ((ord($hash{$offset + 2}) & 0xff) << 8) |
-      ((ord($hash{$offset + 3}) & 0xff))
-    ;
-
-    return str_pad($binary % pow(10, $this->digits), $this->digits, '0', STR_PAD_LEFT);
+    return $this->generate((int)($time / $this->interval));
   }
 
   /**
@@ -81,11 +68,11 @@ class TimeBased extends \lang\Object {
    * Returns a time-based one-time password at a given time
    *
    * @param  string $token The token to verify
-   * @param  com.google.authenticator.Tolerance $tolerance If omitted, previous and next is allowed
    * @param  int $time The unix timestamp. If omitted, uses current time
+   * @param  com.google.authenticator.Tolerance $tolerance If omitted, previous and next is allowed
    * @return bool
    */
-  public function verify($token, Tolerance $tolerance= null, $time= null) {
+  public function verify($token, $time= null, Tolerance $tolerance= null) {
     if (null === $tolerance) $tolerance= Tolerance::$PREVIOUS_AND_NEXT;
     if (null === $time) $time= time();
 

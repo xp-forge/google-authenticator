@@ -10,8 +10,7 @@ use security\SecureString;
  * @see  http://tools.ietf.org/html/rfc4648
  * @test xp://com.google.authenticator.unittest.SecretStringTest
  */
-class SecretString extends \lang\Object implements Secret {
-  private $bytes;
+class SecretString extends Secret {
 
   /**
    * Creates a new secret string given base32-encoded bytes
@@ -40,7 +39,7 @@ class SecretString extends \lang\Object implements Secret {
 
     $buffer= 0;
     $left= 0;
-    $this->bytes= '';
+    $bytes= '';
 
     for ($i= 0, $l= strlen($encoded); $i < $l; $i++) {
       $c= $encoded{$i};
@@ -49,29 +48,13 @@ class SecretString extends \lang\Object implements Secret {
         $buffer= $buffer << 5 | $table[$c];
         $left+= 5;
         if ($left >= 8) {
-          $this->bytes.= chr($buffer >> ($left-= 8));
+          $bytes.= chr($buffer >> ($left-= 8));
         }
       } else {
         throw new FormatException(sprintf('Illegal character 0x%02x in input at position %d/%d', ord($c), $i, $l));
       }
     }
-  }
 
-  /** @return string */
-  public function bytes() { return $this->bytes; }
-
-  /**
-   * Creates a string representation of this secret. Yields as many
-   * asterisks as there are bytes in this secret.
-   *
-   * @return string
-   */
-  public function toString() {
-    return $this->getClassName().'('.str_repeat('*', strlen($this->bytes)).')';
-  }
-
-  /** @return [:var] */
-  public function __debugInfo() {
-    return ['bytes' => str_repeat('*', strlen($this->bytes))];
+    parent::__construct($bytes);
   }
 }

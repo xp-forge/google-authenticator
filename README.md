@@ -8,10 +8,10 @@ Google authenticator
 [![Required HHVM 3.4+](https://raw.githubusercontent.com/xp-framework/web/master/static/hhvm-3_4plus.png)](http://hhvm.com/)
 [![Latest Stable Version](https://poser.pugx.org/xp-forge/google-authenticator/version.png)](https://packagist.org/packages/xp-forge/google-authenticator)
 
-Supports one-time-passwords accordings (HOTP & TOTP) according to [RFC 4226](http://tools.ietf.org/html/rfc4226) and [RFC 6238](http://tools.ietf.org/html/rfc6238).
+Supports one-time passwords accordings (HOTP & TOTP) according to [RFC 4226](http://tools.ietf.org/html/rfc4226) and [RFC 6238](http://tools.ietf.org/html/rfc6238).
 
-Example
--------
+Working with one-time passwords
+-------------------------------
 The following shows the API for time-based one-time passwords (TOTP):
 
 ```php
@@ -60,5 +60,17 @@ $verified= $counterbased->verify($token, $counter);
 $verified= $counterbased->verify($token, $counter, Tolerance::$PREVIOUS_AND_NEXT;
 ```
 
-
 *Note: We use SecureString so that in case of exceptions, the secret will not appear in stack traces.*
+
+Creating secrets
+----------------
+As an issuer of OTPs, you need to create random secrets in order to seed both client and server.
+
+```php
+use com\google\authenticator\Secret;
+
+$random= Secret::random();
+
+// Present to client using TOTP
+$url= 'otpauth://totp/'.urlencode($username).'?secret='.$random->encoded();
+```

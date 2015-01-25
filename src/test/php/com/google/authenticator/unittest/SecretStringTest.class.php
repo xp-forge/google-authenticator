@@ -23,11 +23,13 @@ class SecretStringTest extends \unittest\TestCase {
   }
 
   #[@test, @values('fixtures')]
+  public function encoded($arg) {
+    $this->assertEquals(self::STRING, (new SecretString($arg))->encoded());
+  }
+
+  #[@test, @values('fixtures')]
   public function bytes($arg) {
-    $this->assertEquals(
-      new Bytes("\320o\350\342\034`\372\316yO"),
-      new Bytes((new SecretString($arg))->bytes())
-    );
+    $this->assertEquals(new Bytes("\320o\350\342\034`\372\316yO"), new Bytes((new SecretString($arg))->bytes()));
   }
 
   #[@test]

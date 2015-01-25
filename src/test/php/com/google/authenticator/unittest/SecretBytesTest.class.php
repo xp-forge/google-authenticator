@@ -17,11 +17,13 @@ class SecretBytesTest extends \unittest\TestCase {
   }
 
   #[@test, @values('fixtures')]
+  public function encoded($arg) {
+    $this->assertEquals('2BX6RYQ4MD5M46KP', (new SecretBytes($arg))->encoded());
+  }
+
+  #[@test, @values('fixtures')]
   public function bytes($arg) {
-    $this->assertEquals(
-      new Bytes(self::BYTES),
-      new Bytes((new SecretBytes($arg))->bytes())
-    );
+    $this->assertEquals(new Bytes(self::BYTES), new Bytes((new SecretBytes($arg))->bytes()));
   }
 
   #[@test]

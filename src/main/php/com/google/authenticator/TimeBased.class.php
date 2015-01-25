@@ -65,7 +65,7 @@ class TimeBased extends Algorithm {
   }
 
   /**
-   * Returns a time-based one-time password at a given time
+   * Verifies a time-based one-time password, optionally using a given tolerance
    *
    * @param  string $token The token to verify
    * @param  int $time The unix timestamp. If omitted, uses current time

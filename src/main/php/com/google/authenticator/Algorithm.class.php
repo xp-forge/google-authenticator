@@ -23,6 +23,12 @@ abstract class Algorithm extends \lang\Object {
     $this->crypto= $crypto;
   }
 
+  /**
+   * Generates a one-time password for a given counter value.
+   *
+   * @param  int $count
+   * @return string
+   */
   protected function generate($count) {
     $message= str_pad(pack('N', $count), 8, "\x00", STR_PAD_LEFT);
     $hash= hash_hmac($this->crypto, $message, $this->secret->bytes(), true);
@@ -50,7 +56,7 @@ abstract class Algorithm extends \lang\Object {
    * Verifies a one-time password, optionally using a given tolerance
    *
    * @param  string $token The token to verify
-   * @param  int $count
+   * @param  int $arg
    * @param  com.google.authenticator.Tolerance $tolerance If omitted, previous and next is allowed
    * @return bool
    */

@@ -19,7 +19,7 @@ class CounterBased extends Algorithm {
   }
 
   /**
-   * Returns a counter-based one-time password at a given counter value
+   * Verifies a counter-based one-time password, optionally using a given tolerance
    *
    * @param  string $token The token to verify
    * @param  int $count The counter value

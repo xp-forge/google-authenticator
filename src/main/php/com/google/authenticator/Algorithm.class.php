@@ -45,6 +45,26 @@ abstract class Algorithm extends \lang\Object {
   }
 
   /**
+   * Compares two strings in length-constant time.
+   *
+   * @param  string $known
+   * @param  string $user
+   * @return bool
+   * @see    php://hash_equals
+   * @see    https://crackstation.net/hashing-security.htm
+   */
+  private function equal($known, $user) {
+    $length= strlen($known);
+    if ($length !== strlen($user)) return false;
+
+    $result= 0;
+    for ($i= 0; $i < $length; $i++) {
+      $result |= ord($known{$i} ^ $user{$i});
+    }
+    return 0 === $result;
+  }
+
+  /**
    * Verifies a one-time password, optionally using a given tolerance
    *
    * @param  string $token The token to verify
@@ -56,7 +76,7 @@ abstract class Algorithm extends \lang\Object {
     if (null === $tolerance) $tolerance= Tolerance::$PREVIOUS_AND_NEXT;
 
     for ($offset= $tolerance->past(); $offset <= $tolerance->future(); $offset++) {
-      if ($token === $this->generate($arg + $offset)) return true;
+      if ($this->equal($this->generate($arg + $offset), $token)) return true;
     }
     return false;
   }

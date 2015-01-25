@@ -17,20 +17,24 @@ The following shows the API for time-based one-time passwords (TOTP):
 ```php
 use com\google\authenticator\TimeBased;
 use com\google\authenticator\SecretString;
+use com\google\authenticator\Tolerance;
 use security\SecureString;
 
 $secret= new SecureString('2BX6RYQ4MD5M46KP');
 $timebased= new TimeBased(new SecretString($secret));
-
 $time= time();
 
 // Get token for a given time
 $token= $timebased->at($time);
 $token= $timebased->current();
 
-// Verify token for a given time
-$verified= $timebased->verify($token, $time);
+// Must match exactly
+$verified= $timebased->verify($token, Tolerance::$NONE, $time);
+
+// Allows previous and next
 $verified= $timebased->verify($token);
+$verified= $timebased->verify($token, null, $time);
+$verified= $timebased->verify($token, Tolerance::$PREVIOUS_AND_NEXT, $time);
 ```
 
 *Note: We use SecureString so that in case of exceptions, the secret will not appear in stack traces.*

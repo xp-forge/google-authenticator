@@ -26,6 +26,9 @@ class TimeBased extends \lang\Object {
     $this->crypto= $crypto;
   }
 
+  /** @return int */
+  public function interval() { return $this->interval; }
+
   /**
    * Generates the token for a given interval
    *
@@ -67,13 +70,38 @@ class TimeBased extends \lang\Object {
   }
 
   /**
+   * Returns the previous token based on the current time
+   *
+   * @return string
+   */
+  public function previous() {
+    return $this->generate((int)(time() / $this->interval) - 1);
+  }
+
+  /**
+   * Returns the next token based on the current time
+   *
+   * @return string
+   */
+  public function next() {
+    return $this->generate((int)(time() / $this->interval) + 1);
+  }
+
+  /**
    * Returns a time-based one-time password at a given time
    *
    * @param  string $token The token to verify
+   * @param  com.google.authenticator.Tolerance $tolerance If omitted, previous and next is allowed
    * @param  int $time The unix timestamp. If omitted, uses current time
    * @return bool
    */
-  public function verify($token, $time= null) {
-    return $token === $this->at(null === $time ? time() : $time);
+  public function verify($token, Tolerance $tolerance= null, $time= null) {
+    if (null === $tolerance) $tolerance= Tolerance::$PREVIOUS_AND_NEXT;
+    if (null === $time) $time= time();
+
+    for ($i= $tolerance->past(); $i <= $tolerance->future(); $i++) {
+      if ($token === $this->generate((int)($time / $this->interval) + $i)) return true;
+    }
+    return false;
   }
 }

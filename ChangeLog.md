@@ -3,6 +3,10 @@ Google Authenticator ChangeLog
 
 ## ?.?.? / ????-??-??
 
+## 0.2.0 / 2015-02-07
+
+* Heads up: `Secret` is now a class and no longer an interface
+  (@thekid)
 * Implemented `Secret::random()` as requested and drafted in issue #2.
   (@thekid)
 

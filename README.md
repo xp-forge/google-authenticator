@@ -29,7 +29,7 @@ $token= $timebased->at($time);
 $token= $timebased->current();
 
 // Must match exactly
-$verified= $timebased->verify($token, Tolerance::$NONE, $time);
+$verified= $timebased->verify($token, $time, Tolerance::$NONE);
 
 // Allows previous and next
 $verified= $timebased->verify($token);

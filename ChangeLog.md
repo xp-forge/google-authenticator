@@ -3,6 +3,10 @@ Google Authenticator ChangeLog
 
 ## ?.?.? / ????-??-??
 
+## 0.2.1 / 2015-02-12
+
+* Changed dependency to use XP ~6.0 (instead of dev-master) - @thekid
+
 ## 0.2.0 / 2015-02-07
 
 * Heads up: `Secret` is now a class and no longer an interface

@@ -6,7 +6,7 @@
   "description" : "Google authenticator (HOTP & TOTP)",
   "keywords": ["module", "xp"],
   "require" : {
-    "xp-framework/core": "dev-master",
+    "xp-framework/core": "~6.0",
     "php" : ">=5.4.0"
   },
   "autoload" : {

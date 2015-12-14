@@ -1,5 +1,6 @@
 <?php namespace com\google\authenticator\unittest;
 
+use lang\FormatException;
 use com\google\authenticator\SecretString;
 use security\SecureString;
 use lang\types\Bytes;
@@ -17,7 +18,7 @@ class SecretStringTest extends \unittest\TestCase {
     new SecretString($arg);
   }
 
-  #[@test, @expect('lang.FormatException')]
+  #[@test, @expect(FormatException::class)]
   public function raises_exception_for_invalid_base32_input() {
     new SecretString('äöü');
   }

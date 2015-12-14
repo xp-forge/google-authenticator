@@ -58,7 +58,7 @@ $verified= $counterbased->verify($token, $counter, Tolerance::$NONE);
 
 // Allows previous and next
 $verified= $counterbased->verify($token, $counter);
-$verified= $counterbased->verify($token, $counter, Tolerance::$PREVIOUS_AND_NEXT;
+$verified= $counterbased->verify($token, $counter, Tolerance::$PREVIOUS_AND_NEXT);
 ```
 
 *Note: We use util.Secret so that in case of exceptions, the secret will not appear in stack traces.*

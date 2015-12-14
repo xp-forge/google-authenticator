@@ -3,6 +3,14 @@ Google Authenticator ChangeLog
 
 ## ?.?.? / ????-??-??
 
+## 1.0.0 / 2015-12-14
+
+* **Heads up**: Changed minimum XP version to XP 6.5.0, and with it the
+  minimum PHP version to PHP 5.5.
+  (@thekid)
+* Added official support for PHP 7.0
+  (@thekid)
+
 ## 0.2.1 / 2015-02-12
 
 * Bump version of xp-framework/core dependency to ~6.0

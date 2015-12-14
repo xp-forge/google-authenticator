@@ -1,7 +1,6 @@
 <?php namespace com\google\authenticator;
 
 use lang\FormatException;
-use security\SecureString;
 
 /**
  * A secret based on a base32-encoded string 
@@ -15,7 +14,7 @@ class SecretString extends Secret {
   /**
    * Creates a new secret string given base32-encoded bytes
    *
-   * @param  var $arg Either a string or a SecureString instance
+   * @param  string|util.Secret|security.SecureString $arg
    * @throws lang.FormatException
    */
   public function __construct($arg) {
@@ -35,7 +34,13 @@ class SecretString extends Secret {
       '0' => 0x0e, '1' => 0x0b, '8' => 0x01
     ];
 
-    $encoded= $arg instanceof SecureString ? $arg->getCharacters() : $arg;
+    if ($arg instanceof \security\SecureString) {
+      $encoded= $arg->getCharacters();
+    } else if ($arg instanceof \util\Secret) {
+      $encoded= $arg->reveal();
+    } else {
+      $encoded= (string)$arg;
+    }
 
     $buffer= 0;
     $left= 0;

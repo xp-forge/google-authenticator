@@ -19,9 +19,9 @@ The following shows the API for time-based one-time passwords (TOTP):
 use com\google\authenticator\TimeBased;
 use com\google\authenticator\SecretString;
 use com\google\authenticator\Tolerance;
-use security\SecureString;
+use util\Secret;
 
-$secret= new SecureString('2BX6RYQ4MD5M46KP');
+$secret= new Secret('2BX6RYQ4MD5M46KP');
 $timebased= new TimeBased(new SecretString($secret));
 $time= time();
 
@@ -44,9 +44,9 @@ The following shows the API for counter-based one-time passwords (HOTP):
 use com\google\authenticator\CounterBased;
 use com\google\authenticator\SecretString;
 use com\google\authenticator\Tolerance;
-use security\SecureString;
+use util\Secret;
 
-$secret= new SecureString('2BX6RYQ4MD5M46KP');
+$secret= new Secret('2BX6RYQ4MD5M46KP');
 $counterbased= new CounterBased(new SecretString($secret));
 $counter= 0;
 
@@ -61,16 +61,16 @@ $verified= $counterbased->verify($token, $counter);
 $verified= $counterbased->verify($token, $counter, Tolerance::$PREVIOUS_AND_NEXT;
 ```
 
-*Note: We use SecureString so that in case of exceptions, the secret will not appear in stack traces.*
+*Note: We use util.Secret so that in case of exceptions, the secret will not appear in stack traces.*
 
 Creating secrets
 ----------------
 As an issuer of OTPs, you need to create random secrets in order to seed both client and server.
 
 ```php
-use com\google\authenticator\Secret;
+use com\google\authenticator\Secrets;
 
-$random= Secret::random();
+$random= Secrets::random();
 
 // Present to client using TOTP
 $url= 'otpauth://totp/'.urlencode($username).'?secret='.$random->encoded();

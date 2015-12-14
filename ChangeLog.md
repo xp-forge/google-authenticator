@@ -8,6 +8,12 @@ Google Authenticator ChangeLog
 * **Heads up**: Changed minimum XP version to XP 6.5.0, and with it the
   minimum PHP version to PHP 5.5.
   (@thekid)
+* Created a new utility class `com.google.authenticator.Secrets` which
+  now hosts the `random()` method. This is to avoid importing conflicts
+  with the new `util.Secret` class (*see below*).
+  (@thekid)
+* Added support for new `util.Secret` class introduced in XP 6.8.0
+  (@thekid)
 * Added official support for PHP 7.0
   (@thekid)
 

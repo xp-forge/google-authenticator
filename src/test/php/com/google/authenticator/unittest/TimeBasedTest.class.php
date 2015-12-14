@@ -3,6 +3,7 @@
 use com\google\authenticator\TimeBased;
 use com\google\authenticator\SecretString;
 use com\google\authenticator\Tolerance;
+use util\Secret;
 use security\SecureString;
 
 class TimeBasedTest extends \unittest\TestCase {
@@ -14,7 +15,13 @@ class TimeBasedTest extends \unittest\TestCase {
    * @return void
    */
   public function setUp() {
-    $this->secret= new SecretString(new SecureString('2BX6RYQ4MD5M46KP'));
+
+    // FC with newer XP versions, BC with older XP versions
+    if (class_exists(Secret::class)) {
+      $this->secret= new SecretString(new Secret('2BX6RYQ4MD5M46KP'));
+    } else {
+      $this->secret= new SecretString(new SecureString('2BX6RYQ4MD5M46KP'));
+    }
   }
 
   /** @return var[][] */

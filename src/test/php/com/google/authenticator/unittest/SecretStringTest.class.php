@@ -2,6 +2,7 @@
 
 use lang\FormatException;
 use com\google\authenticator\SecretString;
+use util\Secret;
 use security\SecureString;
 use lang\types\Bytes;
 
@@ -10,7 +11,18 @@ class SecretStringTest extends \unittest\TestCase {
 
   /** @return var[][] */
   private function fixtures() {
-    return [[self::STRING], [new SecureString(self::STRING)]];
+    $fixtures= [[self::STRING]];
+
+    // FC with newer XP versions
+    if (class_exists(Secret::class)) {
+      $fixtures[]= [new Secret(self::STRING)];
+    }
+
+    // BC with older XP versions
+    if (class_exists(SecureString::class)) {
+      $fixtures[]= [new SecureString(self::STRING)];
+    }
+    return $fixtures;
   }
 
   #[@test, @values('fixtures')]

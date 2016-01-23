@@ -67,7 +67,7 @@ class Secret extends \lang\Object {
    * @return string
    */
   public function toString() {
-    return $this->getClassName().'('.str_repeat('*', strlen($this->bytes)).')';
+    return nameof($this).'('.str_repeat('*', strlen($this->bytes)).')';
   }
 
   /** @return [:var] */

@@ -33,9 +33,9 @@ class Tolerance extends \lang\Object {
    */
   public function toString() {
     if ($this->past === $this->future) {
-      return $this->getClassName().'('.$this->future.')';
+      return nameof($this).'('.$this->future.')';
     } else {
-      return $this->getClassName().'(['.$this->past.'..+'.$this->future.'])';
+      return nameof($this).'(['.$this->past.'..+'.$this->future.'])';
     }
   }
 }

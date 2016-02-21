@@ -4,7 +4,7 @@ use lang\FormatException;
 use com\google\authenticator\SecretString;
 use util\Secret;
 use security\SecureString;
-use lang\types\Bytes;
+use util\Bytes;
 
 class SecretStringTest extends \unittest\TestCase {
   const STRING = '2BX6RYQ4MD5M46KP';

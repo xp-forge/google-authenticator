@@ -1,6 +1,6 @@
 <?php namespace com\google\authenticator;
 
-use lang\types\Bytes;
+use util\Bytes;
 
 /**
  * A secret based on raw bytes
@@ -12,10 +12,14 @@ class SecretBytes extends Secret {
   /**
    * Creates a new secret string given base32-encoded bytes
    *
-   * @param  var $arg Either a string or a Bytes instance
+   * @param  util.Bytes|string $bytes
    * @throws lang.FormatException
    */
   public function __construct($bytes) {
-    parent::__construct($bytes instanceof Bytes ? $bytes->buffer : $bytes);
+    if ($bytes instanceof \lang\types\Bytes) {
+      parent::__construct($bytes->buffer);
+    } else {
+      parent::__construct((string)$bytes);
+    }
   }
 }

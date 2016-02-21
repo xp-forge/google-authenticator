@@ -1,7 +1,7 @@
 <?php namespace com\google\authenticator\unittest;
 
 use com\google\authenticator\SecretBytes;
-use lang\types\Bytes;
+use util\Bytes;
 
 class SecretBytesTest extends \unittest\TestCase {
   const BYTES = "\320o\350\342\034`\372\316yO";

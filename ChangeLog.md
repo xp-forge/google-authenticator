@@ -3,6 +3,10 @@ Google Authenticator ChangeLog
 
 ## ?.?.? / ????-??-??
 
+## 3.0.0 / 2017-11-15
+
+* **Heads up: Dropped PHP 5.5 support** - @thekid
+* Added compatibility with XP 8 and XP 9 - @thekid
 * Implemented `lang.Value` instead of extending `lang.Object` - @thekid
 
 ## 2.0.0 / 2016-02-21

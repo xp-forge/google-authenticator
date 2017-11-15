@@ -1,6 +1,6 @@
 <?php namespace com\google\authenticator;
 
-class Tolerance extends \lang\Object {
+class Tolerance implements \lang\Value {
   public static $NONE, $PREVIOUS_AND_NEXT;
   private $past, $future;
 
@@ -37,5 +37,27 @@ class Tolerance extends \lang\Object {
     } else {
       return nameof($this).'(['.$this->past.'..+'.$this->future.'])';
     }
+  }
+
+  /**
+   * Creates a hashcode
+   *
+   * @return string
+   */
+  public function hashCode() {
+    return 'T'.$this->past.'..'.$this->future;
+  }
+
+  /**
+   * Compares this tolerance to a given value
+   *
+   * @param  var $value
+   * @return int
+   */
+  public function compareTo($value) {
+    return $value instanceof self
+      ? Objects::compare([$this->past, $this->future], [$value->past, $value->future])
+      : 1
+    ;
   }
 }

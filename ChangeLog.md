@@ -3,6 +3,8 @@ Google Authenticator ChangeLog
 
 ## ?.?.? / ????-??-??
 
+* Implement `lang.Value` instead of extending `lang.Object` - @thekid
+
 ## 2.0.0 / 2016-02-21
 
 * Added version compatibility with XP 7 - @thekid

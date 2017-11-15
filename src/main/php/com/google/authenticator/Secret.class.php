@@ -2,7 +2,7 @@
 
 use lang\IllegalStateException;
 
-class Secret extends \lang\Object {
+class Secret implements \lang\Value {
   private $bytes;
 
   /**
@@ -68,6 +68,25 @@ class Secret extends \lang\Object {
    */
   public function toString() {
     return nameof($this).'('.str_repeat('*', strlen($this->bytes)).')';
+  }
+
+  /**
+   * Creates a hashcode
+   *
+   * @return string
+   */
+  public function hashCode() {
+    return 'S'.hash('sha256', $this->bytes);
+  }
+
+  /**
+   * Compares this tolerance to a given value
+   *
+   * @param  var $value
+   * @return int
+   */
+  public function compareTo($value) {
+    return $value instanceof self ? strcmp($this->bytes, $value->bytes) : 1;
   }
 
   /** @return [:var] */

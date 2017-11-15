@@ -9,7 +9,7 @@
  * @see   https://crackstation.net/hashing-security.htm
  * @test  xp://com.google.authenticator.unittest.CounterBasedTest
  */
-abstract class Algorithm extends \lang\Object {
+abstract class Algorithm {
   private $secret, $digits, $crypto;
 
   static function __static() {

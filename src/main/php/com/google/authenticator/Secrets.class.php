@@ -28,6 +28,6 @@ abstract class Secrets {
         $bytes.= chr(rand(0, 255));
       }
     }
-    return new Secret($bytes);
+    return new SecretBytes($bytes);
   }
 }

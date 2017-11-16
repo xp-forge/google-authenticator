@@ -2,7 +2,7 @@
 
 use lang\IllegalStateException;
 
-class Secret implements \lang\Value {
+abstract class Secret implements \lang\Value {
   private $bytes;
 
   /**

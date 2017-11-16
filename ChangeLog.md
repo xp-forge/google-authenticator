@@ -3,6 +3,12 @@ Google Authenticator ChangeLog
 
 ## ?.?.? / ????-??-??
 
+## 3.1.0 / 2017-11-16
+
+* Prevented `Secret` class from being used directly; either instantiate
+  a `SecretBytes` or `SecretString` class instead!
+  (@thekid)
+
 ## 3.0.0 / 2017-11-15
 
 * **Heads up: Dropped PHP 5.5 support** - @thekid

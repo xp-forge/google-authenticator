@@ -16,9 +16,7 @@ Working with one-time passwords
 The following shows the API for time-based one-time passwords (TOTP):
 
 ```php
-use com\google\authenticator\TimeBased;
-use com\google\authenticator\SecretString;
-use com\google\authenticator\Tolerance;
+use com\google\authenticator\{TimeBased, SecretString, Tolerance};
 use util\Secret;
 
 $secret= new Secret('2BX6RYQ4MD5M46KP');
@@ -41,9 +39,7 @@ $verified= $timebased->verify($token, $time, Tolerance::$PREVIOUS_AND_NEXT);
 The following shows the API for counter-based one-time passwords (HOTP):
 
 ```php
-use com\google\authenticator\CounterBased;
-use com\google\authenticator\SecretString;
-use com\google\authenticator\Tolerance;
+use com\google\authenticator\{CounterBased, SecretString, Tolerance};
 use util\Secret;
 
 $secret= new Secret('2BX6RYQ4MD5M46KP');

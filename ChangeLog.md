@@ -3,6 +3,15 @@ Google Authenticator ChangeLog
 
 ## ?.?.? / ????-??-??
 
+## 4.0.0 / 2018-09-17
+
+* **Heads up**: Dropped support for XP6, minimum required XP version
+  is now 7.3.0, which includes the `util.Random` class
+  (@thekid)
+* Replaced random implementation inside `Secrets` with `util.Random`
+  from the XP Framework
+  (@thekid)
+
 ## 3.1.0 / 2017-11-16
 
 * Prevented `Secret` class from being used directly; either instantiate
@@ -41,7 +50,7 @@ Google Authenticator ChangeLog
 
 ## 0.2.1 / 2015-02-12
 
-* Bump version of xp-framework/core dependency to ~6.0
+* Bump version of xp-framework/core dependency to 6.0
   (@kiesel)
 
 ## 0.2.0 / 2015-02-07

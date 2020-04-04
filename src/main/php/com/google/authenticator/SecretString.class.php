@@ -47,7 +47,7 @@ class SecretString extends Secret {
     $bytes= '';
 
     for ($i= 0, $l= strlen($encoded); $i < $l; $i++) {
-      $c= $encoded{$i};
+      $c= $encoded[$i];
 
       if (isset($table[$c])) {
         $buffer= $buffer << 5 | $table[$c];

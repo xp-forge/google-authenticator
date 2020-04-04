@@ -20,7 +20,7 @@ abstract class Algorithm {
 
         $result= 0;
         for ($i= 0; $i < $length; $i++) {
-          $result |= ord($known{$i} ^ $user{$i});
+          $result |= ord($known[$i] ^ $user[$i]);
         }
         return 0 === $result;
       }
@@ -50,12 +50,12 @@ abstract class Algorithm {
     $message= str_pad(pack('N', $count), 8, "\x00", STR_PAD_LEFT);
     $hash= hash_hmac($this->crypto, $message, $this->secret->bytes(), true);
 
-    $offset= ord($hash{strlen($hash) - 1}) & 0xf;
+    $offset= ord($hash[strlen($hash) - 1]) & 0xf;
     $binary=
-      ((ord($hash{$offset}) & 0x7f) << 24) |
-      ((ord($hash{$offset + 1}) & 0xff) << 16) |
-      ((ord($hash{$offset + 2}) & 0xff) << 8) |
-      ((ord($hash{$offset + 3}) & 0xff))
+      ((ord($hash[$offset]) & 0x7f) << 24) |
+      ((ord($hash[$offset + 1]) & 0xff) << 16) |
+      ((ord($hash[$offset + 2]) & 0xff) << 8) |
+      ((ord($hash[$offset + 3]) & 0xff))
     ;
 
     return str_pad($binary % pow(10, $this->digits), $this->digits, '0', STR_PAD_LEFT);

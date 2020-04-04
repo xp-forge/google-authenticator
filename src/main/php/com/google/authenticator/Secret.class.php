@@ -38,14 +38,14 @@ abstract class Secret implements \lang\Value {
       throw new IllegalStateException('Cannot encode value, too long ('.$length.')');
     }
 
-    $buffer= ord($this->bytes{0});
+    $buffer= ord($this->bytes[0]);
     $next= 1;
     $left= 8;
     $result= '';
     while (($left > 0 || $next < $length)) {
       if ($left < 5) {
         if ($next < $length) {
-          $buffer= $buffer << 8 | ord($this->bytes{$next++}) & 0xff;
+          $buffer= $buffer << 8 | ord($this->bytes[$next++]) & 0xff;
           $left+= 8;
         } else {
           $pad= 5 - $left;
@@ -54,7 +54,7 @@ abstract class Secret implements \lang\Value {
         }
       }
 
-      $result.= $alphabet{0x1f & ($buffer >> ($left-= 5))};
+      $result.= $alphabet[0x1f & ($buffer >> ($left-= 5))];
     }
 
     return $result;

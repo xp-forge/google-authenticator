@@ -3,6 +3,10 @@ Google Authenticator ChangeLog
 
 ## ?.?.? / ????-??-??
 
+## 4.0.1 / 2020-04-04
+
+* Made compatible with XP 10 - @thekid
+
 ## 4.0.0 / 2018-09-17
 
 * **Heads up**: Dropped support for XP6, minimum required XP version

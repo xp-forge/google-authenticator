@@ -1,10 +1,9 @@
 <?php namespace com\google\authenticator\unittest;
 
-use com\google\authenticator\CounterBased;
-use com\google\authenticator\SecretString;
-use com\google\authenticator\Tolerance;
-use util\Secret;
+use com\google\authenticator\{CounterBased, SecretString, Tolerance};
 use security\SecureString;
+use unittest\{Test, Values};
+use util\Secret;
 
 class CounterBasedTest extends \unittest\TestCase {
   private $secret;
@@ -43,27 +42,27 @@ class CounterBasedTest extends \unittest\TestCase {
     ];
   }
 
-  #[@test]
+  #[Test]
   public function can_create() {
     new CounterBased($this->secret);
   }
 
-  #[@test, @values('fixtures')]
+  #[Test, Values('fixtures')]
   public function at($count, $token) {
     $this->assertEquals($token, (new CounterBased($this->secret))->at($count));
   }
 
-  #[@test, @values('fixtures')]
+  #[Test, Values('fixtures')]
   public function verify_without_tolerance($count, $token) {
     $this->assertTrue((new CounterBased($this->secret))->verify($token, $count, Tolerance::$NONE));
   }
 
-  #[@test, @values('previous_and_next')]
+  #[Test, Values('previous_and_next')]
   public function verify_allowing_previous_and_next_is_default($token, $which) {
     $this->assertTrue((new CounterBased($this->secret))->verify($token, 8364950), $which);
   }
 
-  #[@test, @values('previous_and_next')]
+  #[Test, Values('previous_and_next')]
   public function verify_allowing_previous_and_next($token, $which) {
     $this->assertTrue((new CounterBased($this->secret))->verify($token, 8364950, Tolerance::$PREVIOUS_AND_NEXT), $which);
   }

@@ -1,10 +1,9 @@
 <?php namespace com\google\authenticator\unittest;
 
-use com\google\authenticator\TimeBased;
-use com\google\authenticator\SecretString;
-use com\google\authenticator\Tolerance;
-use util\Secret;
+use com\google\authenticator\{SecretString, TimeBased, Tolerance};
 use security\SecureString;
+use unittest\{Test, Values};
+use util\Secret;
 
 class TimeBasedTest extends \unittest\TestCase {
   private $secret;
@@ -43,44 +42,44 @@ class TimeBasedTest extends \unittest\TestCase {
     ];
   }
 
-  #[@test]
+  #[Test]
   public function can_create() {
     new TimeBased($this->secret);
   }
 
-  #[@test, @values('fixtures')]
+  #[Test, Values('fixtures')]
   public function at($time, $token) {
     $this->assertEquals($token, (new TimeBased($this->secret))->at($time));
   }
 
-  #[@test, @values('fixtures')]
+  #[Test, Values('fixtures')]
   public function verify_without_tolerance($time, $token) {
     $this->assertTrue((new TimeBased($this->secret))->verify($token, $time, Tolerance::$NONE));
   }
 
-  #[@test, @values('previous_and_next')]
+  #[Test, Values('previous_and_next')]
   public function verify_allowing_previous_and_next_is_default($token, $which) {
     $this->assertTrue((new TimeBased($this->secret))->verify($token, 250948500), $which);
   }
 
-  #[@test, @values('previous_and_next')]
+  #[Test, Values('previous_and_next')]
   public function verify_allowing_previous_and_next($token, $which) {
     $this->assertTrue((new TimeBased($this->secret))->verify($token, 250948500, Tolerance::$PREVIOUS_AND_NEXT), $which);
   }
 
-  #[@test]
+  #[Test]
   public function current() {
     $t= new TimeBased($this->secret);
     $this->assertEquals($t->at(time()), $t->current());
   }
 
-  #[@test]
+  #[Test]
   public function previous() {
     $t= new TimeBased($this->secret);
     $this->assertEquals($t->at(time() - $t->interval()), $t->previous());
   }
 
-  #[@test]
+  #[Test]
   public function next() {
     $t= new TimeBased($this->secret);
     $this->assertEquals($t->at(time() + $t->interval()), $t->next());

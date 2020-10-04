@@ -1,10 +1,10 @@
 <?php namespace com\google\authenticator\unittest;
 
-use lang\FormatException;
 use com\google\authenticator\SecretString;
-use util\Secret;
+use lang\FormatException;
 use security\SecureString;
-use util\Bytes;
+use unittest\{Expect, Test, Values};
+use util\{Bytes, Secret};
 
 class SecretStringTest extends \unittest\TestCase {
   const STRING = '2BX6RYQ4MD5M46KP';
@@ -25,27 +25,27 @@ class SecretStringTest extends \unittest\TestCase {
     return $fixtures;
   }
 
-  #[@test, @values('fixtures')]
+  #[Test, Values('fixtures')]
   public function can_create($arg) {
     new SecretString($arg);
   }
 
-  #[@test, @expect(FormatException::class)]
+  #[Test, Expect(FormatException::class)]
   public function raises_exception_for_invalid_base32_input() {
     new SecretString('äöü');
   }
 
-  #[@test, @values('fixtures')]
+  #[Test, Values('fixtures')]
   public function encoded($arg) {
     $this->assertEquals(self::STRING, (new SecretString($arg))->encoded());
   }
 
-  #[@test, @values('fixtures')]
+  #[Test, Values('fixtures')]
   public function bytes($arg) {
     $this->assertEquals(new Bytes("\320o\350\342\034`\372\316yO"), new Bytes((new SecretString($arg))->bytes()));
   }
 
-  #[@test]
+  #[Test]
   public function string_representation() {
     $this->assertEquals(
       'com.google.authenticator.SecretString(**********)',

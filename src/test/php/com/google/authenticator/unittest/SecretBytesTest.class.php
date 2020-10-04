@@ -1,6 +1,7 @@
 <?php namespace com\google\authenticator\unittest;
 
 use com\google\authenticator\SecretBytes;
+use unittest\{Test, Values};
 use util\Bytes;
 
 class SecretBytesTest extends \unittest\TestCase {
@@ -11,22 +12,22 @@ class SecretBytesTest extends \unittest\TestCase {
     return [[self::BYTES], [new Bytes(self::BYTES)]];
   }
 
-  #[@test, @values('fixtures')]
+  #[Test, Values('fixtures')]
   public function can_create($arg) {
     new SecretBytes($arg);
   }
 
-  #[@test, @values('fixtures')]
+  #[Test, Values('fixtures')]
   public function encoded($arg) {
     $this->assertEquals('2BX6RYQ4MD5M46KP', (new SecretBytes($arg))->encoded());
   }
 
-  #[@test, @values('fixtures')]
+  #[Test, Values('fixtures')]
   public function bytes($arg) {
     $this->assertEquals(new Bytes(self::BYTES), new Bytes((new SecretBytes($arg))->bytes()));
   }
 
-  #[@test]
+  #[Test]
   public function string_representation() {
     $this->assertEquals(
       'com.google.authenticator.SecretBytes(**********)',

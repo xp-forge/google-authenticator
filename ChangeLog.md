@@ -3,6 +3,10 @@ Google Authenticator ChangeLog
 
 ## ?.?.? / ????-??-??
 
+## 5.0.1 / 2021-10-21
+
+* Made library compatible with XP 11 - @thekid
+
 ## 5.0.0 / 2020-04-10
 
 * Implemented xp-framework/rfc#334: Drop PHP 5.6:

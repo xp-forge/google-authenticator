@@ -87,9 +87,11 @@ class TimeBased extends Algorithm {
    */
   public function provisioningUri($label) {
     return sprintf(
-      'otpauth://totp/%s?secret=%s',
+      'otpauth://totp/%s?secret=%s%s%s',
       implode(':', array_map('rawurlencode', (array)$label)),
-      $this->secret->encoded()
+      $this->secret->encoded(),
+      30 === $this->interval ? '' : '&period='.$this->interval,
+      6 === $this->digits ? '' : '&digits='.$this->digits
     );
   }
 }

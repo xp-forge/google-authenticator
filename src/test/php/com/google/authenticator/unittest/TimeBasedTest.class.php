@@ -101,4 +101,20 @@ class TimeBasedTest {
       (new TimeBased($this->secret))->provisioningUri(['ACME Co', 'account-id'])
     );
   }
+
+  #[Test]
+  public function provisioning_uri_with_digits_other_than_default() {
+    Assert::equals(
+      'otpauth://totp/account-id?secret=2BX6RYQ4MD5M46KP&digits=8',
+      (new TimeBased($this->secret, 30, 8))->provisioningUri('account-id')
+    );
+  }
+
+  #[Test, Values([15, 60])]
+  public function provisioning_uri_with_interval_other_than_default($interval) {
+    Assert::equals(
+      'otpauth://totp/account-id?secret=2BX6RYQ4MD5M46KP&period='.$interval,
+      (new TimeBased($this->secret, $interval))->provisioningUri('account-id')
+    );
+  }
 }

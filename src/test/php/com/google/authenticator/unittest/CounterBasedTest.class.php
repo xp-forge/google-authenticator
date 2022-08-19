@@ -86,4 +86,12 @@ class CounterBasedTest {
       (new CounterBased($this->secret))->provisioningUri(['ACME Co', 'account-id'])
     );
   }
+
+  #[Test]
+  public function provisioning_uri_with_digits_other_than_default() {
+    Assert::equals(
+      'otpauth://hotp/account-id?secret=2BX6RYQ4MD5M46KP&counter=0&digits=8',
+      (new CounterBased($this->secret, 8))->provisioningUri('account-id')
+    );
+  }
 }

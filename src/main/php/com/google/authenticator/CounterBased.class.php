@@ -41,10 +41,11 @@ class CounterBased extends Algorithm {
    */
   public function provisioningUri($label, $counter= 0) {
     return sprintf(
-      'otpauth://hotp/%s?secret=%s&counter=%d',
+      'otpauth://hotp/%s?secret=%s&counter=%d%s',
       implode(':', array_map('rawurlencode', (array)$label)),
       $this->secret->encoded(),
-      $counter
+      $counter,
+      6 === $this->digits ? '' : '&digits='.$this->digits
     );
   }
 }

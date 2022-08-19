@@ -3,6 +3,12 @@ Google Authenticator ChangeLog
 
 ## ?.?.? / ????-??-??
 
+## 5.1.0 / 2022-08-19
+
+* Merged PR #3: Add `provisioningUri()` method to time- and counter-based
+  algorithms
+  (@thekid)
+
 ## 5.0.1 / 2021-10-21
 
 * Made library compatible with XP 11 - @thekid

@@ -60,13 +60,25 @@ $verified= $counterbased->verify($token, $counter, Tolerance::$PREVIOUS_AND_NEXT
 
 Creating secrets
 ----------------
-As an issuer of OTPs, you need to create random secrets in order to seed both client and server.
+As an issuer of OTPs, you need to create random secrets in order to seed both client and server. Using the *provisioningUri()* method, you can fetch the URIs used to configure the clients.
 
 ```php
-use com\google\authenticator\Secrets;
+use com\google\authenticator\{CounterBased, TimeBased, Secrets};
 
 $random= Secrets::random();
 
-// Present to client using TOTP
-$url= 'otpauth://totp/'.urlencode($username).'?secret='.$random->encoded();
+// HOTP, otpauth://hotp/{account}?secret={secret}&counter={counter}
+$counterbased= new CounterBased($random);
+$uri= $counterbased->provisioningUri($account);             // Start with counter= 0
+$uri= $counterbased->provisioningUri($account, $initial);   // Start with counter= $initial
+
+// TOTP, otpauth://totp/{account}?secret={secret}
+$timebased= new TimeBased($random);
+$uri= $timebased->provisioningUri($account);
+
+// Pass a map of string to append additional parameters
+$uri= $timebased->provisioningUri($account, ['issuer' => 'ACME Co']);
+
+// Pass an array to namespace the account, yields "ACME%20Co:user@example.com"
+$uri= $timebased->provisioningUri(['ACME Co', 'user@example.com']);
 ```

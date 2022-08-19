@@ -5,6 +5,9 @@ Google Authenticator ChangeLog
 
 ## 5.1.0 / 2022-08-19
 
+* Merged PR #4: Allow passing util.Secret instances to time- and counter
+  based algorithms directly (the "be liberal in what you accept" paradigm)
+  (@thekid)
 * Merged PR #3: Add `provisioningUri()` method to time- and counter-based
   algorithms
   (@thekid)

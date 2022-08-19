@@ -13,21 +13,6 @@ abstract class Algorithm {
   private $crypto;
   protected $digits, $secret;
 
-  static function __static() {
-    if (!function_exists('hash_equals')) {
-      function hash_equals($known, $user) {
-        $length= strlen($known);
-        if ($length !== strlen($user)) return false;
-
-        $result= 0;
-        for ($i= 0; $i < $length; $i++) {
-          $result |= ord($known[$i] ^ $user[$i]);
-        }
-        return 0 === $result;
-      }
-    }
-  }
-
   /**
    * Creates a new one-time-password instance
    *

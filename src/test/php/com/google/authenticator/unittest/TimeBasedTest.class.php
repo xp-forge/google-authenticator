@@ -85,4 +85,12 @@ class TimeBasedTest {
     $t= new TimeBased($this->secret);
     Assert::equals($t->at(time() + $t->interval()), $t->next());
   }
+
+  #[Test]
+  public function provisioning_uri() {
+    Assert::equals(
+      'otpauth://totp/account-id?secret=2BX6RYQ4MD5M46KP',
+      (new TimeBased($this->secret))->provisioningUri('account-id')
+    );
+  }
 }

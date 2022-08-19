@@ -31,4 +31,15 @@ class CounterBased extends Algorithm {
   public function verify($token, $count, Tolerance $tolerance= null) {
     return $this->compare($token, (int)$count, $tolerance);
   }
+
+  /**
+   * Returns provisioning URI
+   * 
+   * @param  string $account
+   * @param  int $counter
+   * @return string
+   */
+  public function provisioningUri($account, $counter= 0) {
+    return sprintf('otpauth://hotp/%s?secret=%s&counter=%d', $account, $this->secret->encoded(), $counter);
+  }
 }

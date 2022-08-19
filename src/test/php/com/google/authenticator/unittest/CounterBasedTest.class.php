@@ -62,4 +62,20 @@ class CounterBasedTest {
   public function verify_allowing_previous_and_next($token, $which) {
     Assert::true((new CounterBased($this->secret))->verify($token, 8364950, Tolerance::$PREVIOUS_AND_NEXT), $which);
   }
+
+  #[Test]
+  public function provisioning_uri() {
+    Assert::equals(
+      'otpauth://hotp/account-id?secret=2BX6RYQ4MD5M46KP&counter=0',
+      (new CounterBased($this->secret))->provisioningUri('account-id')
+    );
+  }
+
+  #[Test]
+  public function provisioning_uri_with_counter() {
+    Assert::equals(
+      'otpauth://hotp/account-id?secret=2BX6RYQ4MD5M46KP&counter=10',
+      (new CounterBased($this->secret))->provisioningUri('account-id', 10)
+    );
+  }
 }

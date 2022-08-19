@@ -10,7 +10,8 @@
  * @test  xp://com.google.authenticator.unittest.CounterBasedTest
  */
 abstract class Algorithm {
-  private $secret, $digits, $crypto;
+  private $digits, $crypto;
+  protected $secret;
 
   static function __static() {
     if (!function_exists('hash_equals')) {

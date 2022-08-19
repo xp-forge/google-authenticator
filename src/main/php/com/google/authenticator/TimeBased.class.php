@@ -78,4 +78,14 @@ class TimeBased extends Algorithm {
     if (null === $time) $time= time();
     return $this->compare($token, (int)($time/ $this->interval), $tolerance);
   }
+
+  /**
+   * Returns provisioning URI
+   * 
+   * @param  string $account
+   * @return string
+   */
+  public function provisioningUri($account) {
+    return sprintf('otpauth://totp/%s?secret=%s', $account, $this->secret->encoded());
+  }
 }

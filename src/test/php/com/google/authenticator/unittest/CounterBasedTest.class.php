@@ -1,7 +1,6 @@
 <?php namespace com\google\authenticator\unittest;
 
-use com\google\authenticator\{CounterBased, SecretString, Tolerance};
-use security\SecureString;
+use com\google\authenticator\{CounterBased, Tolerance};
 use unittest\{Assert, Test, Values};
 use util\Secret;
 
@@ -10,13 +9,7 @@ class CounterBasedTest {
 
   #[Before]
   public function sharedSecret() {
-
-    // FC with newer XP versions, BC with older XP versions
-    if (class_exists(Secret::class)) {
-      $this->secret= new SecretString(new Secret('2BX6RYQ4MD5M46KP'));
-    } else {
-      $this->secret= new SecretString(new SecureString('2BX6RYQ4MD5M46KP'));
-    }
+    $this->secret= new Secret('2BX6RYQ4MD5M46KP');
   }
 
   /** @return var[][] */

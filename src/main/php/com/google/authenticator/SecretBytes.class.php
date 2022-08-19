@@ -8,7 +8,7 @@
 class SecretBytes extends Secret {
 
   /**
-   * Creates a new secret string given base32-encoded bytes
+   * Creates a new secret string given raw bytes
    *
    * @param  util.Bytes|string $bytes
    * @throws lang.FormatException

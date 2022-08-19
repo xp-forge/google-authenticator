@@ -16,12 +16,12 @@ class TimeBased extends Algorithm {
   /**
    * Creates a new time-based one-time-password instance
    *
-   * @param  com.google.authenticator.Secret $secret
+   * @param  util.Secret|com.google.authenticator.Secret $secret
    * @param  int $interval If omitted, uses 30 seconds
    * @param  int $digits If omitted, defaults to 6
    * @param  string $crypto If omitted, defaults to "sha1"
    */
-  public function __construct(Secret $secret, $interval= 30, $digits= 6, $crypto= 'sha1') {
+  public function __construct($secret, $interval= 30, $digits= 6, $crypto= 'sha1') {
     parent::__construct($secret, $digits, $crypto);
     $this->interval= $interval;
   }

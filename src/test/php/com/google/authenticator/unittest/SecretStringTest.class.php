@@ -2,27 +2,16 @@
 
 use com\google\authenticator\SecretString;
 use lang\FormatException;
-use security\SecureString;
 use unittest\{Assert, Expect, Test, Values};
 use util\{Bytes, Secret};
 
 class SecretStringTest {
   const STRING = '2BX6RYQ4MD5M46KP';
 
-  /** @return var[][] */
+  /** @return iterable */
   private function fixtures() {
-    $fixtures= [[self::STRING]];
-
-    // FC with newer XP versions
-    if (class_exists(Secret::class)) {
-      $fixtures[]= [new Secret(self::STRING)];
-    }
-
-    // BC with older XP versions
-    if (class_exists(SecureString::class)) {
-      $fixtures[]= [new SecureString(self::STRING)];
-    }
-    return $fixtures;
+    yield [self::STRING];
+    yield [new Secret(self::STRING)];
   }
 
   #[Test, Values('fixtures')]

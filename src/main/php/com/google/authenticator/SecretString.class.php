@@ -5,16 +5,16 @@ use lang\FormatException;
 /**
  * A secret based on a base32-encoded string 
  *
- * @see  http://tools.ietf.org/html/rfc3548
- * @see  http://tools.ietf.org/html/rfc4648
- * @test xp://com.google.authenticator.unittest.SecretStringTest
+ * @see   http://tools.ietf.org/html/rfc3548
+ * @see   http://tools.ietf.org/html/rfc4648
+ * @test  com.google.authenticator.unittest.SecretStringTest
  */
 class SecretString extends Secret {
 
   /**
    * Creates a new secret string given base32-encoded bytes
    *
-   * @param  string|util.Secret|security.SecureString $arg
+   * @param  string|util.Secret $arg
    * @throws lang.FormatException
    */
   public function __construct($arg) {
@@ -34,9 +34,7 @@ class SecretString extends Secret {
       '0' => 0x0e, '1' => 0x0b, '8' => 0x01
     ];
 
-    if ($arg instanceof \security\SecureString) {
-      $encoded= $arg->getCharacters();
-    } else if ($arg instanceof \util\Secret) {
+    if ($arg instanceof \util\Secret) {
       $encoded= $arg->reveal();
     } else {
       $encoded= (string)$arg;

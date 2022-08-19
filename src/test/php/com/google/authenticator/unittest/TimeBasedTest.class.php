@@ -1,27 +1,15 @@
 <?php namespace com\google\authenticator\unittest;
 
-use com\google\authenticator\{SecretString, TimeBased, Tolerance};
-use security\SecureString;
+use com\google\authenticator\{TimeBased, Tolerance};
 use unittest\{Assert, Test, Values};
 use util\Secret;
 
 class TimeBasedTest {
   private $secret;
 
-  /**
-   * Sets up test by initializing shared secret
-   *
-   * @return void
-   */
   #[Before]
-  public function setUp() {
-
-    // FC with newer XP versions, BC with older XP versions
-    if (class_exists(Secret::class)) {
-      $this->secret= new SecretString(new Secret('2BX6RYQ4MD5M46KP'));
-    } else {
-      $this->secret= new SecretString(new SecureString('2BX6RYQ4MD5M46KP'));
-    }
+  public function sharedSecret() {
+    $this->secret= new Secret('2BX6RYQ4MD5M46KP');
   }
 
   /** @return var[][] */

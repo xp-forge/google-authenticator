@@ -7,9 +7,10 @@ use util\Bytes;
 class SecretBytesTest {
   const BYTES = "\320o\350\342\034`\372\316yO";
 
-  /** @return var[][] */
+  /** @return iterable */
   private function fixtures() {
-    return [[self::BYTES], [new Bytes(self::BYTES)]];
+    yield [self::BYTES];
+    yield [new Bytes(self::BYTES)];
   }
 
   #[Test, Values('fixtures')]

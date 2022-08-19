@@ -15,11 +15,11 @@ Working with one-time passwords
 The following shows the API for time-based one-time passwords (TOTP):
 
 ```php
-use com\google\authenticator\{TimeBased, SecretString, Tolerance};
+use com\google\authenticator\{TimeBased, Tolerance};
 use util\Secret;
 
 $secret= new Secret('2BX6RYQ4MD5M46KP');
-$timebased= new TimeBased(new SecretString($secret));
+$timebased= new TimeBased($secret);
 $time= time();
 
 // Get token for a given time
@@ -38,11 +38,11 @@ $verified= $timebased->verify($token, $time, Tolerance::$PREVIOUS_AND_NEXT);
 The following shows the API for counter-based one-time passwords (HOTP):
 
 ```php
-use com\google\authenticator\{CounterBased, SecretString, Tolerance};
+use com\google\authenticator\{CounterBased, Tolerance};
 use util\Secret;
 
 $secret= new Secret('2BX6RYQ4MD5M46KP');
-$counterbased= new CounterBased(new SecretString($secret));
+$counterbased= new CounterBased($secret);
 $counter= 0;
 
 // Get token for a given counter

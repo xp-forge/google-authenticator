@@ -16,12 +16,12 @@ abstract class Algorithm {
   /**
    * Creates a new one-time-password instance
    *
-   * @param  com.google.authenticator.Secret $secret
+   * @param  util.Secret|com.google.authenticator.Secret $secret
    * @param  int $digits If omitted, defaults to 6
    * @param  string $crypto If omitted, defaults to "sha1"
    */
-  public function __construct(Secret $secret, $digits= 6, $crypto= 'sha1') {
-    $this->secret= $secret;
+  public function __construct($secret, $digits= 6, $crypto= 'sha1') {
+    $this->secret= $secret instanceof Secret ? $secret : new SecretString($secret);
     $this->digits= $digits;
     $this->crypto= $crypto;
   }

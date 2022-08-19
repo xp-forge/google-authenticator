@@ -83,15 +83,17 @@ class TimeBased extends Algorithm {
    * Returns provisioning URI
    * 
    * @param  string|string[] $label
+   * @param  [:string] $parameters
    * @return string
    */
-  public function provisioningUri($label) {
+  public function provisioningUri($label, $parameters= []) {
     return sprintf(
-      'otpauth://totp/%s?secret=%s%s%s',
+      'otpauth://totp/%s?secret=%s%s%s%s',
       implode(':', array_map('rawurlencode', (array)$label)),
       $this->secret->encoded(),
       30 === $this->interval ? '' : '&period='.$this->interval,
-      6 === $this->digits ? '' : '&digits='.$this->digits
+      6 === $this->digits ? '' : '&digits='.$this->digits,
+      $parameters ? '&'.http_build_query($parameters) : ''
     );
   }
 }

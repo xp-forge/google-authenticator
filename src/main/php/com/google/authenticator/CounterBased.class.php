@@ -37,15 +37,17 @@ class CounterBased extends Algorithm {
    * 
    * @param  string|string[] $label
    * @param  int $counter
+   * @param  [:string] $parameters
    * @return string
    */
-  public function provisioningUri($label, $counter= 0) {
+  public function provisioningUri($label, $counter= 0, $parameters= []) {
     return sprintf(
-      'otpauth://hotp/%s?secret=%s&counter=%d%s',
+      'otpauth://hotp/%s?secret=%s&counter=%d%s%s',
       implode(':', array_map('rawurlencode', (array)$label)),
       $this->secret->encoded(),
       $counter,
-      6 === $this->digits ? '' : '&digits='.$this->digits
+      6 === $this->digits ? '' : '&digits='.$this->digits,
+      $parameters ? '&'.http_build_query($parameters) : ''
     );
   }
 }

@@ -117,4 +117,12 @@ class TimeBasedTest {
       (new TimeBased($this->secret, $interval))->provisioningUri('account-id')
     );
   }
+
+  #[Test]
+  public function provisioning_uri_with_extra_parameters() {
+    Assert::equals(
+      'otpauth://totp/account-id?secret=2BX6RYQ4MD5M46KP&issuer=Test',
+      (new TimeBased($this->secret))->provisioningUri('account-id', ['issuer' => 'Test'])
+    );
+  }
 }

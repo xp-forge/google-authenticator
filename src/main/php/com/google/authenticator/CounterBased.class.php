@@ -35,11 +35,16 @@ class CounterBased extends Algorithm {
   /**
    * Returns provisioning URI
    * 
-   * @param  string $account
+   * @param  string|string[] $label
    * @param  int $counter
    * @return string
    */
-  public function provisioningUri($account, $counter= 0) {
-    return sprintf('otpauth://hotp/%s?secret=%s&counter=%d', $account, $this->secret->encoded(), $counter);
+  public function provisioningUri($label, $counter= 0) {
+    return sprintf(
+      'otpauth://hotp/%s?secret=%s&counter=%d',
+      implode(':', array_map('rawurlencode', (array)$label)),
+      $this->secret->encoded(),
+      $counter
+    );
   }
 }

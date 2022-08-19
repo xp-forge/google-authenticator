@@ -93,4 +93,12 @@ class TimeBasedTest {
       (new TimeBased($this->secret))->provisioningUri('account-id')
     );
   }
+
+  #[Test]
+  public function provisioning_uri_with_label() {
+    Assert::equals(
+      'otpauth://totp/ACME%20Co:account-id?secret=2BX6RYQ4MD5M46KP',
+      (new TimeBased($this->secret))->provisioningUri(['ACME Co', 'account-id'])
+    );
+  }
 }

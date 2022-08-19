@@ -2,18 +2,14 @@
 
 use com\google\authenticator\{CounterBased, SecretString, Tolerance};
 use security\SecureString;
-use unittest\{Test, Values};
+use unittest\{Assert, Test, Values};
 use util\Secret;
 
-class CounterBasedTest extends \unittest\TestCase {
+class CounterBasedTest {
   private $secret;
 
-  /**
-   * Sets up test by initializing shared secret
-   *
-   * @return void
-   */
-  public function setUp() {
+  #[Before]
+  public function sharedSecret() {
 
     // FC with newer XP versions, BC with older XP versions
     if (class_exists(Secret::class)) {
@@ -49,21 +45,21 @@ class CounterBasedTest extends \unittest\TestCase {
 
   #[Test, Values('fixtures')]
   public function at($count, $token) {
-    $this->assertEquals($token, (new CounterBased($this->secret))->at($count));
+    Assert::equals($token, (new CounterBased($this->secret))->at($count));
   }
 
   #[Test, Values('fixtures')]
   public function verify_without_tolerance($count, $token) {
-    $this->assertTrue((new CounterBased($this->secret))->verify($token, $count, Tolerance::$NONE));
+    Assert::true((new CounterBased($this->secret))->verify($token, $count, Tolerance::$NONE));
   }
 
   #[Test, Values('previous_and_next')]
   public function verify_allowing_previous_and_next_is_default($token, $which) {
-    $this->assertTrue((new CounterBased($this->secret))->verify($token, 8364950), $which);
+    Assert::true((new CounterBased($this->secret))->verify($token, 8364950), $which);
   }
 
   #[Test, Values('previous_and_next')]
   public function verify_allowing_previous_and_next($token, $which) {
-    $this->assertTrue((new CounterBased($this->secret))->verify($token, 8364950, Tolerance::$PREVIOUS_AND_NEXT), $which);
+    Assert::true((new CounterBased($this->secret))->verify($token, 8364950, Tolerance::$PREVIOUS_AND_NEXT), $which);
   }
 }

@@ -3,10 +3,10 @@
 use com\google\authenticator\SecretString;
 use lang\FormatException;
 use security\SecureString;
-use unittest\{Expect, Test, Values};
+use unittest\{Assert, Expect, Test, Values};
 use util\{Bytes, Secret};
 
-class SecretStringTest extends \unittest\TestCase {
+class SecretStringTest {
   const STRING = '2BX6RYQ4MD5M46KP';
 
   /** @return var[][] */
@@ -37,17 +37,17 @@ class SecretStringTest extends \unittest\TestCase {
 
   #[Test, Values('fixtures')]
   public function encoded($arg) {
-    $this->assertEquals(self::STRING, (new SecretString($arg))->encoded());
+    Assert::equals(self::STRING, (new SecretString($arg))->encoded());
   }
 
   #[Test, Values('fixtures')]
   public function bytes($arg) {
-    $this->assertEquals(new Bytes("\320o\350\342\034`\372\316yO"), new Bytes((new SecretString($arg))->bytes()));
+    Assert::equals(new Bytes("\320o\350\342\034`\372\316yO"), new Bytes((new SecretString($arg))->bytes()));
   }
 
   #[Test]
   public function string_representation() {
-    $this->assertEquals(
+    Assert::equals(
       'com.google.authenticator.SecretString(**********)',
       (new SecretString(self::STRING))->toString()
     );

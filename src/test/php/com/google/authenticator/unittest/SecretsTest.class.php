@@ -1,12 +1,12 @@
 <?php namespace com\google\authenticator\unittest;
 
 use com\google\authenticator\Secrets;
-use unittest\Test;
+use unittest\{Assert, Test};
 
-class SecretsTest extends \unittest\TestCase {
+class SecretsTest {
 
   #[Test]
   public function random() {
-    $this->assertEquals(10, strlen(Secrets::random()->bytes()));
+    Assert::equals(10, strlen(Secrets::random()->bytes()));
   }
 }

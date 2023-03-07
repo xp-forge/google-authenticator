@@ -1,7 +1,7 @@
 <?php namespace com\google\authenticator\unittest;
 
 use com\google\authenticator\SecretBytes;
-use unittest\{Assert, Test, Values};
+use test\{Assert, Test, Values};
 use util\Bytes;
 
 class SecretBytesTest {
@@ -13,17 +13,17 @@ class SecretBytesTest {
     yield [new Bytes(self::BYTES)];
   }
 
-  #[Test, Values('fixtures')]
+  #[Test, Values(from: 'fixtures')]
   public function can_create($arg) {
     new SecretBytes($arg);
   }
 
-  #[Test, Values('fixtures')]
+  #[Test, Values(from: 'fixtures')]
   public function encoded($arg) {
     Assert::equals('2BX6RYQ4MD5M46KP', (new SecretBytes($arg))->encoded());
   }
 
-  #[Test, Values('fixtures')]
+  #[Test, Values(from: 'fixtures')]
   public function bytes($arg) {
     Assert::equals(new Bytes(self::BYTES), new Bytes((new SecretBytes($arg))->bytes()));
   }

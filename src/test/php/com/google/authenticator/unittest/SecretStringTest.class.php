@@ -2,7 +2,7 @@
 
 use com\google\authenticator\SecretString;
 use lang\FormatException;
-use unittest\{Assert, Expect, Test, Values};
+use test\{Assert, Expect, Test, Values};
 use util\{Bytes, Secret};
 
 class SecretStringTest {
@@ -14,7 +14,7 @@ class SecretStringTest {
     yield [new Secret(self::STRING)];
   }
 
-  #[Test, Values('fixtures')]
+  #[Test, Values(from: 'fixtures')]
   public function can_create($arg) {
     new SecretString($arg);
   }
@@ -24,12 +24,12 @@ class SecretStringTest {
     new SecretString('äöü');
   }
 
-  #[Test, Values('fixtures')]
+  #[Test, Values(from: 'fixtures')]
   public function encoded($arg) {
     Assert::equals(self::STRING, (new SecretString($arg))->encoded());
   }
 
-  #[Test, Values('fixtures')]
+  #[Test, Values(from: 'fixtures')]
   public function bytes($arg) {
     Assert::equals(new Bytes("\320o\350\342\034`\372\316yO"), new Bytes((new SecretString($arg))->bytes()));
   }

@@ -3,6 +3,8 @@ Google Authenticator ChangeLog
 
 ## ?.?.? / ????-??-??
 
+* Merged PR #5: Migrate to new testing library - @thekid
+
 ## 5.1.0 / 2022-08-19
 
 * Merged PR #4: Allow passing util.Secret instances to time- and counter

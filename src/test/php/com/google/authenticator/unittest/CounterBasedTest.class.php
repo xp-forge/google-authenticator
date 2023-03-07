@@ -1,7 +1,7 @@
 <?php namespace com\google\authenticator\unittest;
 
 use com\google\authenticator\{CounterBased, Tolerance};
-use unittest\{Assert, Test, Values};
+use test\{Assert, Before, Test, Values};
 use util\Secret;
 
 class CounterBasedTest {
@@ -36,22 +36,22 @@ class CounterBasedTest {
     new CounterBased($this->secret);
   }
 
-  #[Test, Values('fixtures')]
+  #[Test, Values(from: 'fixtures')]
   public function at($count, $token) {
     Assert::equals($token, (new CounterBased($this->secret))->at($count));
   }
 
-  #[Test, Values('fixtures')]
+  #[Test, Values(from: 'fixtures')]
   public function verify_without_tolerance($count, $token) {
     Assert::true((new CounterBased($this->secret))->verify($token, $count, Tolerance::$NONE));
   }
 
-  #[Test, Values('previous_and_next')]
+  #[Test, Values(from: 'previous_and_next')]
   public function verify_allowing_previous_and_next_is_default($token, $which) {
     Assert::true((new CounterBased($this->secret))->verify($token, 8364950), $which);
   }
 
-  #[Test, Values('previous_and_next')]
+  #[Test, Values(from: 'previous_and_next')]
   public function verify_allowing_previous_and_next($token, $which) {
     Assert::true((new CounterBased($this->secret))->verify($token, 8364950, Tolerance::$PREVIOUS_AND_NEXT), $which);
   }

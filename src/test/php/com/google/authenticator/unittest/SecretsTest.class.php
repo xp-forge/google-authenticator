@@ -1,7 +1,7 @@
 <?php namespace com\google\authenticator\unittest;
 
 use com\google\authenticator\Secrets;
-use unittest\{Assert, Test};
+use test\{Assert, Test};
 
 class SecretsTest {
 

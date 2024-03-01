@@ -3,6 +3,7 @@ Google Authenticator ChangeLog
 
 ## ?.?.? / ????-??-??
 
+* Added PHP 8.4 to the test matrix - @thekid
 * Merged PR #5: Migrate to new testing library - @thekid
 
 ## 5.1.0 / 2022-08-19

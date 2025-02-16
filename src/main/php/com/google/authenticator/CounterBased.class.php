@@ -25,10 +25,10 @@ class CounterBased extends Algorithm {
    *
    * @param  string $token The token to verify
    * @param  int $count The counter value
-   * @param  com.google.authenticator.Tolerance $tolerance If omitted, previous and next is allowed
+   * @param  ?com.google.authenticator.Tolerance $tolerance If omitted, previous and next is allowed
    * @return bool
    */
-  public function verify($token, $count, Tolerance $tolerance= null) {
+  public function verify($token, $count, ?Tolerance $tolerance= null) {
     return $this->compare($token, (int)$count, $tolerance);
   }
 

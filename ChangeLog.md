@@ -3,6 +3,14 @@ Google Authenticator ChangeLog
 
 ## ?.?.? / ????-??-??
 
+## 6.0.0 / 2025-02-16
+
+* **Heads up:** Dropped support for PHP < 7.4, see xp-framework/rfc#343
+  (@thekid)
+* Fixed *Implicitly marking parameter [...] as nullable is deprecated*
+  warning with PHP 8.4
+  (@thekid)
+
 ## 5.2.0 / 2024-03-24
 
 * Made compatible with XP 12 - @thekid

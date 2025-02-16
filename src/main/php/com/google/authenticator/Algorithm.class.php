@@ -52,10 +52,10 @@ abstract class Algorithm {
    *
    * @param  string $token The token to verify
    * @param  int $arg
-   * @param  com.google.authenticator.Tolerance $tolerance If omitted, previous and next is allowed
+   * @param  ?com.google.authenticator.Tolerance $tolerance If omitted, previous and next is allowed
    * @return bool
    */
-  protected function compare($token, $arg, Tolerance $tolerance= null) {
+  protected function compare($token, $arg, ?Tolerance $tolerance= null) {
     if (null === $tolerance) $tolerance= Tolerance::$PREVIOUS_AND_NEXT;
 
     for ($offset= $tolerance->past(); $offset <= $tolerance->future(); $offset++) {
@@ -77,8 +77,8 @@ abstract class Algorithm {
    *
    * @param  string $token The token to verify
    * @param  int $arg
-   * @param  com.google.authenticator.Tolerance $tolerance If omitted, previous and next is allowed
+   * @param  ?com.google.authenticator.Tolerance $tolerance If omitted, previous and next is allowed
    * @return bool
    */
-  public abstract function verify($token, $arg, Tolerance $tolerance= null);
+  public abstract function verify($token, $arg, ?Tolerance $tolerance= null);
 }

@@ -71,10 +71,10 @@ class TimeBased extends Algorithm {
    *
    * @param  string $token The token to verify
    * @param  int $time The unix timestamp. If omitted, uses current time
-   * @param  com.google.authenticator.Tolerance $tolerance If omitted, previous and next is allowed
+   * @param  ?com.google.authenticator.Tolerance $tolerance If omitted, previous and next is allowed
    * @return bool
    */
-  public function verify($token, $time= null, Tolerance $tolerance= null) {
+  public function verify($token, $time= null, ?Tolerance $tolerance= null) {
     if (null === $time) $time= time();
     return $this->compare($token, (int)($time/ $this->interval), $tolerance);
   }

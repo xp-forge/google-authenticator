@@ -4,9 +4,9 @@ Google authenticator
 [![Build status on GitHub](https://github.com/xp-forge/google-authenticator/workflows/Tests/badge.svg)](https://github.com/xp-forge/google-authenticator/actions)
 [![XP Framework Module](https://raw.githubusercontent.com/xp-framework/web/master/static/xp-framework-badge.png)](https://github.com/xp-framework/core)
 [![BSD Licence](https://raw.githubusercontent.com/xp-framework/web/master/static/licence-bsd.png)](https://github.com/xp-framework/core/blob/master/LICENCE.md)
-[![Requires PHP 7.0+](https://raw.githubusercontent.com/xp-framework/web/master/static/php-7_0plus.svg)](http://php.net/)
+[![Requires PHP 7.4+](https://raw.githubusercontent.com/xp-framework/web/master/static/php-7_4plus.svg)](http://php.net/)
 [![Supports PHP 8.0+](https://raw.githubusercontent.com/xp-framework/web/master/static/php-8_0plus.svg)](http://php.net/)
-[![Latest Stable Version](https://poser.pugx.org/xp-forge/google-authenticator/version.png)](https://packagist.org/packages/xp-forge/google-authenticator)
+[![Latest Stable Version](https://poser.pugx.org/xp-forge/google-authenticator/version.svg)](https://packagist.org/packages/xp-forge/google-authenticator)
 
 Supports one-time passwords accordings (HOTP & TOTP) according to [RFC 4226](http://tools.ietf.org/html/rfc4226) and [RFC 6238](http://tools.ietf.org/html/rfc6238).
 
